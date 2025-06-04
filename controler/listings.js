@@ -36,22 +36,32 @@ module.exports.createListings=async(req,res,next)=>{
  res.redirect("/listings")
 };
 
+// module.exports.renderEditForm=async (req, res) => {
+//   let { id } = req.params;
+//   const listing = await Listing.findById(id);
+//   if (!listing) {
+//     return res.status(404).send("Listing not found");
+//   }
+//   res .render("listings/edit", { listing });
+// };  
+
 module.exports.renderEditForm=async (req,res)=>{
    let {id}=req.params;
   const listing=await Listing.findById(id);
-  // if(!listing){
-  //   req.flash("error","Listing Not Found!");
-  //   return res.redirect("/listings");
-  // }
-  // let originalimgUrl=listing.image.url;
-  // originalimgUrl=originalimgUrl.replace("/upload","/upload/c_scale, w_250");
-  res.render("listings/edit.ejs",{listing});
+  if(!listing){
+    req.flash("error","Listing Not Found!");
+    return res.redirect("/listings");
+  }
+  let originalimgUrl=listing.image.url;
+  originalimgUrl=originalimgUrl.replace("/upload","/upload/w_250");
+  res.render("listings/edit.ejs",{listing,originalimgUrl});
 };
 
 module.exports.updateListings=async(req,res)=>{
   let {id}=req.params;
   let listing=await Listing.findByIdAndUpdate(id,{...req.body.listing});
-  if(typeof req.file!=="undefined"){
+  if(typeof req.file!=="undefined"){ 
+  console.log(req.file);
   let url=req.file.path;
   let filename=req.file.filename;
   listing.image={url,filename};
