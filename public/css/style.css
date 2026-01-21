@@ -11,7 +11,7 @@ body{
 }
 
 .navbar{
-  min-height: 5rem; ;
+   min-height: auto;
   background-color: white;
   z-index: 1030;
 }
