@@ -3,6 +3,7 @@ body{
   display: flex;
   flex-direction: column;
   min-height: 100vh;
+  padding-top: 5rem;
 
 }
 .container{
@@ -10,8 +11,9 @@ body{
 }
 
 .navbar{
-  height:5rem ;
+  min-height: 5rem; ;
   background-color: white;
+  z-index: 1030;
 }
 .fa-compass{
    color: #fe424d;
@@ -19,6 +21,7 @@ body{
 }
 .nav-link{
   color: #222222 !important;
+   white-space: nowrap;
 }
 
 .f-info-links a{
